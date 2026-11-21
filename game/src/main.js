@@ -84,7 +84,7 @@ function overlayButton(label, action) {
   b.type = 'button';
   b.textContent = label;
   b.addEventListener('click', () => {
-    sound.unlock();
+    sound.context();
     sound.click();
     action();
   });
@@ -170,7 +170,7 @@ for (const [canvas, panel] of [[$('panel-left'), 'left'], [$('panel-right'), 'ri
     engine.crosshair.visible = false;
   });
   canvas.addEventListener('pointerdown', (e) => {
-    sound.unlock();
+    sound.context();
     const p = panelPoint(canvas, e);
     engine.setLens(panel, p.x, p.y);
     engine.handlePoint(panel, p.x, p.y);
@@ -184,17 +184,20 @@ function toggleLens() {
   els.btnMag.setAttribute('aria-pressed', String(engine.lens.on));
 }
 
-els.btnHint.addEventListener('click', () => { sound.unlock(); engine.useHint(); });
-els.btnMag.addEventListener('click', () => { sound.unlock(); toggleLens(); });
-els.btnPause.addEventListener('click', () => { sound.unlock(); engine.togglePause(); });
+els.btnHint.addEventListener('click', () => { sound.context(); engine.useHint(); });
+els.btnMag.addEventListener('click', () => { sound.context(); toggleLens(); });
+els.btnPause.addEventListener('click', () => { sound.context(); engine.togglePause(); });
 els.btnRestart.addEventListener('click', () => {
-  sound.unlock();
+  sound.context();
   if (engine.phase !== 'title') engine.retryScene();
 });
+let soundOn = true;
 els.btnSound.addEventListener('click', () => {
-  const on = sound.toggle();
-  els.btnSound.setAttribute('aria-pressed', String(on));
-  els.btnSound.firstChild.textContent = on ? '🔊 Sound ' : '🔇 Sound ';
+  soundOn = !soundOn;
+  sound.setMuted(!soundOn);
+  els.btnSound.setAttribute('aria-pressed', String(soundOn));
+  els.btnSound.firstChild.textContent = soundOn ? '🔊 Sound ' : '🔇 Sound ';
+  if (soundOn) { sound.context(); sound.click(); }
 });
 
 /* ---------------- keyboard ---------------- */
@@ -208,7 +211,7 @@ window.addEventListener('keydown', (e) => {
     case 'ArrowUp': engine.moveCrosshair(0, -step); e.preventDefault(); break;
     case 'ArrowDown': engine.moveCrosshair(0, step); e.preventDefault(); break;
     case 'Enter':
-      sound.unlock();
+      sound.context();
       if (phase === 'playing') engine.checkCrosshair();
       else if (phase === 'title') engine.startRun();
       else if (phase === 'roundWon') engine.nextScene();
