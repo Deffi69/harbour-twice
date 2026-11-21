@@ -1,0 +1,253 @@
+/* Harbour Twice — page styling. A deep-sea navy frame around two
+   parchment-bright panels, brass accents like a ship's fittings. */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #0d2137;
+  color: #f3ead8;
+  font-family: "Segoe UI", "Trebuchet MS", Verdana, system-ui, sans-serif;
+}
+
+#app {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 10px 14px 14px;
+}
+
+/* ---------- header / HUD ---------- */
+
+#hud {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+#brand h1 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: 3px;
+  color: #ffd97a;
+  text-shadow: 0 2px 0 #7a4d12;
+}
+
+#tagline {
+  margin: 2px 0 0;
+  font-size: 12.5px;
+  letter-spacing: 0.6px;
+  color: #a9c6de;
+}
+
+#scene-box { text-align: center; min-width: 170px; }
+
+#scene-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffe9b0;
+}
+
+#scene-dots { margin-top: 4px; }
+
+#scene-dots .dot {
+  display: inline-block;
+  width: 11px; height: 11px;
+  margin: 0 3px;
+  border-radius: 50%;
+  border: 2px solid #6f96b8;
+  background: transparent;
+}
+
+#scene-dots .dot.done { background: #7ed492; border-color: #7ed492; }
+#scene-dots .dot.now { background: #ffd97a; border-color: #ffd97a; }
+
+#counters {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#remaining-pill {
+  background: #c8433c;
+  border: 3px solid #ffb3ab;
+  border-radius: 999px;
+  padding: 4px 16px 6px;
+  text-align: center;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.35);
+}
+
+#remaining-num { font-size: 26px; font-weight: 800; line-height: 1; }
+#remaining-label { display: block; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
+
+#score-box { font-size: 14px; line-height: 1.5; color: #dcebf7; }
+#score-box strong { color: #ffd97a; }
+
+#mistake-box .pip {
+  display: inline-block;
+  width: 13px; height: 13px;
+  margin-right: 4px;
+  border-radius: 50%;
+  border: 2px solid #8fb0ca;
+  background: transparent;
+}
+
+#mistake-box .pip.spent { background: #c8433c; border-color: #ff9d94; }
+
+#timer-wrap {
+  position: relative;
+  flex-basis: 100%;
+  height: 16px;
+  margin-top: 8px;
+  background: #081826;
+  border: 1px solid #33506e;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#timer-bar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #57b96a, #a8d45e);
+  transition: width 0.2s linear;
+}
+
+#timer-wrap.low #timer-bar { background: linear-gradient(90deg, #c8433c, #e07b39); }
+
+#timer-text {
+  position: absolute;
+  right: 8px; top: 0;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.7);
+}
+
+/* ---------- stage ---------- */
+
+#stage {
+  position: relative;
+  display: flex;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.panel-wrap {
+  margin: 0;
+  flex: 1 1 0;
+  background: #12314e;
+  border: 3px solid #2c587f;
+  border-radius: 10px;
+  padding: 8px 8px 4px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+.panel-wrap canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  cursor: crosshair;
+  background: #9fc6dd;
+}
+
+.panel-wrap figcaption {
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  color: #a9c6de;
+  padding: 5px 0 3px;
+}
+
+/* ---------- overlay ---------- */
+
+#overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 17, 29, 0.62);
+  border-radius: 10px;
+  z-index: 5;
+}
+
+#overlay.hidden { display: none; }
+
+#overlay-card {
+  background: #fdf6e0;
+  color: #20303e;
+  border: 4px solid #c89b3c;
+  border-radius: 14px;
+  padding: 26px 34px;
+  max-width: 520px;
+  text-align: center;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.55);
+}
+
+#overlay-card h2 { margin: 0 0 8px; font-size: 28px; color: #8a5a13; }
+#overlay-card p { margin: 0 0 16px; font-size: 15.5px; line-height: 1.5; }
+
+#overlay-buttons button {
+  margin: 0 5px;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 2px solid #8a5a13;
+  background: #ffd97a;
+  color: #4a3205;
+  cursor: pointer;
+}
+
+#overlay-buttons button:hover { background: #ffca4f; }
+
+/* ---------- controls ---------- */
+
+#controls {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+#controls button {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 13px;
+  border-radius: 999px;
+  border: 2px solid #2c587f;
+  background: #173c5e;
+  color: #eaf3fb;
+  cursor: pointer;
+}
+
+#controls button:hover { background: #1f4c77; }
+#controls button[aria-pressed="true"] { background: #c89b3c; border-color: #ffd97a; color: #23180a; }
+#controls button:disabled { opacity: 0.45; cursor: default; }
+
+#controls kbd {
+  background: rgba(255,255,255,0.16);
+  border-radius: 4px;
+  padding: 0 5px;
+  font-size: 11.5px;
+  font-family: inherit;
+}
+
+#hints-left {
+  background: #c8433c;
+  border-radius: 999px;
+  padding: 0 7px;
+  font-size: 12.5px;
+}
+
+#howto {
+  flex-basis: 100%;
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #a9c6de;
+}

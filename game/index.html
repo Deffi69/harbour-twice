@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harbour Twice — Spot the Difference</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header id="hud">
+    <div id="brand">
+      <h1>HARBOUR TWICE</h1>
+      <p id="tagline">spot-the-difference: 6 scenes, 50 differences, magnifier + keyboard play</p>
+    </div>
+    <div id="scene-box">
+      <div id="scene-name">Harbour at Dawn</div>
+      <div id="scene-dots" aria-label="scene progress"></div>
+    </div>
+    <div id="counters">
+      <div id="remaining-pill"><span id="remaining-num">7</span><span id="remaining-label">to find</span></div>
+      <div id="score-box">
+        <div id="score-line">Score <strong id="score">0</strong></div>
+        <div id="streak-line">Streak <strong id="streak">×0</strong></div>
+      </div>
+      <div id="mistake-box" title="False alarms">
+        <span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span><span class="pip"></span>
+      </div>
+    </div>
+    <div id="timer-wrap">
+      <div id="timer-bar"></div>
+      <div id="timer-text">2:30</div>
+    </div>
+  </header>
+
+  <main id="stage">
+    <figure class="panel-wrap">
+      <canvas id="panel-left" width="560" height="420"></canvas>
+      <figcaption>AS IT WAS</figcaption>
+    </figure>
+    <figure class="panel-wrap">
+      <canvas id="panel-right" width="560" height="420"></canvas>
+      <figcaption>AS IT IS NOW</figcaption>
+    </figure>
+    <div id="overlay" class="hidden">
+      <div id="overlay-card">
+        <h2 id="overlay-title">Harbour Twice</h2>
+        <p id="overlay-text"></p>
+        <div id="overlay-buttons"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer id="controls">
+    <button id="btn-hint" type="button">💡 Hint <kbd>H</kbd> <span id="hints-left">3</span></button>
+    <button id="btn-mag" type="button" aria-pressed="false">🔍 Magnifier <kbd>M</kbd></button>
+    <button id="btn-pause" type="button">⏸ Pause <kbd>P</kbd></button>
+    <button id="btn-sound" type="button" aria-pressed="true">🔊 Sound <kbd>S</kbd></button>
+    <button id="btn-restart" type="button">↺ Restart scene <kbd>R</kbd></button>
+    <p id="howto">Click a difference in either picture — or steer the crosshair with the
+      <strong>arrow keys</strong> and press <strong>Enter</strong>. A wrong click costs 5 seconds;
+      five false alarms end the scene.</p>
+  </footer>
+</div>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
